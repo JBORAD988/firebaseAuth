@@ -1,0 +1,100 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-atom">
+</ngx-spinner>
+
+<!--<body class="nav-gradient-primary" >-->
+<div style="margin-bottom: 2% ">
+  <app-header></app-header>
+</div>
+<br>
+
+<div class="container my-5 color" style="border-radius: 15px;">
+  <h1 class="mb-3">All Users</h1>
+  <table class="table" *ngIf="users && users.length > 0">
+    <thead>
+    <tr>
+
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td class="justify-content-center">
+        <div class="d-flex" *ngIf="user.isEdit">
+          <mat-form-field appearance="fill" *ngIf="user.isEdit" style="max-width: 80%;
+                      max-height: 60%;">
+            <mat-label>Firstname</mat-label>
+            <input matInput type="text"  placeholder="Firstname">
+            <!--              <mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+          <mat-form-field appearance="fill" *ngIf="user.isEdit">
+            <mat-label>Lastname</mat-label>
+            <input matInput type="text"  placeholder="Lastname">
+            <!--              <mat-hint>Hint</mat-hint>-->
+          </mat-form-field>
+        </div>
+        <div *ngIf="!user.isEdit">
+          {{ user.data.firstname + ' ' + user.data.lastname }}
+        </div>
+      </td>
+      <td class="justify-content-center">
+        <mat-form-field appearance="fill" *ngIf="user.isEdit">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" placeholder="Email">
+          <!--              <mat-hint>Hint</mat-hint>-->
+        </mat-form-field>
+        <div *ngIf="!user.isEdit">
+          {{ user.data.email }}
+        </div>
+      </td>
+      <td class="justify-content-center">
+        <mat-form-field appearance="fill" *ngIf="user.isEdit">
+          <mat-label>Username</mat-label>
+          <input matInput type="text"  placeholder="Username">
+        </mat-form-field>
+        <div *ngIf="!user.isEdit">
+          {{ user.data.phone }}
+        </div>
+      </td>
+      <td class="justify-content-center">
+        <mat-form-field *ngIf="user.isEdit">
+          <mat-label>Role</mat-label>
+          <mat-select name="role" >
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+              {{ role.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="!user.isEdit">
+          {{ getRoleFullName(user.data.role) }}
+        </div>
+
+      </td>
+      <td class="justify-content-center">
+        <div *ngIf="!user.isEdit">
+          <i class="fa fa-pencil-square-o px-2" aria-hidden="true" (click)="onEdit(user)" title="Edit"></i>
+          <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteClick(user.id)" title="Delete"></i>
+        </div>
+        <div *ngIf="user.isEdit">
+          <i class="fa fa-cloud px-2" aria-hidden="true" (click)="updateData()" title="Save"></i>
+          <i class="fa fa-times-circle" aria-hidden="true" (click)="OnCancel(user)" title="Cancel"></i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!users || users.length <= 0">No Employees Found</p>
+</div>
+<!--</body>-->
+
+
+
+

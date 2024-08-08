@@ -1,0 +1,24 @@
+@import "../../../assets/css/common";
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+*{
+  font-size: 14px;
+}
+
+.bordert:after {
+  content: "or Connect with";
+  position: absolute;
+  top: -13px;
+  left: 50%; /* Center the content horizontally */
+  transform: translateX(-50%); /* Center the content horizontally */
+  background-color: white;
+  padding: 0 8px;
+}
