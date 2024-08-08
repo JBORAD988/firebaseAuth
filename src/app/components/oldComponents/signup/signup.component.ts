@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import Validateform from "../../helper/validateform";
+import Validateform from "../../../helper/validateform";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgToastService} from "ng-angular-popup";

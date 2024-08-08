@@ -6,9 +6,12 @@ import {HttpClient} from "@angular/common/http";
 import {AuthenticationService} from "../../services/authentication.service";
 import {DataService} from "../../services/data.service";
 import {NgxSpinnerService} from "ngx-spinner";
-import {MatSort} from "@angular/material/sort";
-import {MatTableDataSource, } from "@angular/material/table";
+// import {MatSort} from "@angular/material/sort";
+// import {MatTableDataSource, } from "@angular/material/table";
 import {user} from "@angular/fire/auth";
+import Swal from 'sweetalert2'
+
+
 
 @Component({
   selector: 'app-newdashboard',
@@ -19,9 +22,10 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
 
 
   displayedColumns = ['fullname', 'email', 'phone', 'role', 'action'];
-  dataSource = new MatTableDataSource();
-
-  @ViewChild(MatSort) sort!: MatSort
+  // dataSource = new MatTableDataSource<any>;
+  editingRowId!: string
+  isEdit = true
+  // @ViewChild(MatSort) sort!: MatSort
 
 
 
@@ -29,11 +33,10 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
   oldUserData: any;
 
   UserDetails: UserModel ={
-    isEdit: true,
-    id: '',
-    username:'',
     firstname: '',
     lastname: '',
+    city:'',
+    phone:'',
     email: '',
     role: '',
   }
@@ -41,8 +44,6 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
   public fullName: string = "";
 
   constructor(
-
-
     private toast: NgToastService,
     private el: ElementRef,
     private renderer: Renderer2,
@@ -66,16 +67,39 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
   getData() {
     this.dataservice.getDataFromFirestore().subscribe((data: UserModel[]) => {
       this.users = data
+      // this.dataSource = new MatTableDataSource(data)
       console.log(data);
     });
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
+    // this.dataSource.sort=this.sort
     this.spinner.show();
     setTimeout(() => {
       this.spinner.hide();
     }, 1000);
+
+    // this.welcomeAleart()
+
+  }
+
+
+  welcomeAleart(){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "bottom",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Welcome"
+    });
   }
 
   getUser(){
@@ -110,19 +134,19 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
   //   userObj.isEdit = true;
   // }
 
-  onEdit(userObj: UserModel) {
+  onEdit(userObj: any) {
     this.oldUserData = JSON.stringify(userObj);
+    this.editingRowId = userObj.id
     this.UserDetails = {
-      isEdit: true,
-      id: userObj.id,
-      username: userObj.username,
       firstname: userObj.firstname,
       lastname: userObj.lastname,
+      city: userObj.city,
+      phone: userObj.phone,
       email: userObj.email,
       role: userObj.role,
     };
-    this.users.forEach((e: UserModel) => (e.isEdit = false));
-    userObj.isEdit = true;
+    // this.users.forEach((e: UserModel) => (e.isEdit = false));
+    // userObj.isEdit = true;
   }
 
 
@@ -141,8 +165,43 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
     obj.isEdit = false;
   }
 
-  onDeleteClick(id: string): void {
-    this.dataservice.deleteUser(id)
+
+
+  onDeleteClick(id: string, uid:any): void {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#224abe",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.dataservice.deleteUser(id)
+        this.auth.deleteUser(uid)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
+
+
+    // this.firebaseAuthService.deleteUser(uidToDelete)
+    //   .then(() => {
+    //     console.log('User deleted successfully');
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error deleting user:', error);
+    //   });
+
+
+  }
+  afterEdit(){
+
   }
 
   private handleDeleteSuccess() {
@@ -187,5 +246,7 @@ export class NewdashboardComponent implements OnInit, AfterViewInit {
     return  console.log(localStorage.getItem('id'))
 
   }
+
+  protected readonly user = user;
 }
 

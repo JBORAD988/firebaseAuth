@@ -1,1 +1,73 @@
-<p>edit-data works!</p>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-atom">
+</ngx-spinner>
+
+<!--<body class="nav-gradient-primary" >-->
+<div style="margin-bottom: 2% ">
+  <app-header></app-header>
+</div>
+<br>
+<div class="container my-5 ">
+  <h1 class="mb-3">Edit Employee</h1>
+  <form #form="ngForm"  >
+    <div class="container-flex">
+    <mat-form-field appearance="outline" style="width: 530px;">
+      <mat-label>FirstName</mat-label>
+      <input matInput placeholder="Enter your First-Name" id="firstname" name="firstname" [(ngModel)]="EditForm.firstname" >
+      <mat-icon matSuffix>account_circle</mat-icon>
+<!--      <mat-hint *ngIf="EditForm.controls['firstName'].dirty&& EditForm.hasError('required','firstName')" class="text-danger">*First-Name must be required</mat-hint>-->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 530px;">
+      <mat-label>LastName</mat-label>
+      <input matInput placeholder="Enter your First-Name"  type="text" id="lastname" name="lastname" [(ngModel)]="EditForm.lastname">
+      <mat-icon matSuffix>account_circle</mat-icon>
+<!--      <mat-hint *ngIf="EditForm.controls['lastName'].dirty&& EditForm.hasError('required','lastName')" class="text-danger">*Last-Name must be required</mat-hint>-->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 530px;">
+      <mat-label>Phone Number</mat-label>
+      <input matInput placeholder="Enter phone" id="phone" name="phone"  [(ngModel)]="EditForm.phone"  required>
+      <mat-icon matSuffix>phone</mat-icon>
+<!--      <mat-hint *ngIf="EditForm.controls['phone'].dirty&&EditForm.hasError('required','phone')" class="text-danger">*Phone-Number must be required</mat-hint>-->
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" style="width: 530px;">
+      <mat-label>city</mat-label>
+      <input matInput placeholder="Enter city" id="city" name="city"  [(ngModel)]="EditForm.city"   required>
+      <mat-icon matSuffix>location_city</mat-icon>
+<!--      <mat-hint *ngIf="EditForm.controls['city'].dirty&&EditForm.hasError('required','city')" class="text-danger">*Phone-Number must be required</mat-hint>-->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 530px;">
+      <mat-label>Role</mat-label>
+      <mat-select name="role"  id="role" [(ngModel)]="EditForm.role">
+        <mat-option *ngFor="let role of roles" [value]="role.value">
+          {{ role.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" style="width: 530px;">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="name@example.com" id="email" name="email" [(ngModel)]="EditForm.email"  required>
+      <mat-icon matSuffix>alternate_email</mat-icon>
+<!--      <mat-hint *ngIf="EditForm.controls['email'].dirty&&EditForm.hasError('required', 'email')" class="text-danger"> * Email must required</mat-hint>-->
+    </mat-form-field>
+
+    </div>
+
+<div style="display: flex; justify-content: space-evenly;">
+    <button  mat-raised-button color="primary" type="submit"  style="width: 530px; font-size: 14px;" (click)="updateEmployee()"> Update</button>
+    <button  mat-raised-button color="warn"   style="width: 530px; font-size: 14px;" (click)="delete()"> Delete</button>
+</div>
+    <hr>
+    <div class="text-center pt-4 text-muted" style="font-size: 14px" >Want to go back? click on<a id="signup" (click)="goback()" class="text-decoration-none" style="cursor: pointer"> Back to Dashboard</a></div>
+  </form>
+</div>

@@ -1,1 +1,64 @@
-<p>newforgotpass works!</p>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-atom">
+</ngx-spinner>
+
+<div class="container">
+
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+
+    <div class="col-xl-10 col-lg-12 col-md-9">
+
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block bg-daglo-image"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
+                  <p class="mb-4">We get it, stuff happens. Just enter your email address below
+                    and we'll send you a link to reset your password!</p>
+                </div>
+                <form [formGroup]="ForgotForm">
+                  <mat-form-field appearance="outline" style="width: 400px;">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="name@example.com" formControlName="email"  required>
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                  </mat-form-field>
+
+                  <hr>
+                  <button mat-raised-button color="primary" type="submit" (click)="recoverPassword()" style="width: 400px;" >Send Recovery Email</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                  <a class="small" [routerLink]="['/','newlogin']">Back to Login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+

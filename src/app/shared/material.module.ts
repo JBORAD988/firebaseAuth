@@ -13,7 +13,6 @@ import {MatRadioModule} from '@angular/material/radio';
 
 
 
-
 @NgModule({
   declarations: [],
   exports: [
@@ -27,7 +26,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
   ]
 })
 export class MaterialModule { }

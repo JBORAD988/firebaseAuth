@@ -1,1 +1,110 @@
-<p>newsignup works!</p>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-atom">
+</ngx-spinner>
+
+<div class="container">
+
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row">
+        <div class="col-lg-5 d-none d-lg-block bg-daglo-image"></div>
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+            </div>
+            <form [formGroup]="signUpForm">
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>FirstName</mat-label>
+                <input matInput placeholder="Enter your First-Name" formControlName="firstName">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-hint *ngIf="signUpForm.controls['firstName'].dirty&& signUpForm.hasError('required','firstName')" class="text-danger">*First-Name must be required</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>LastName</mat-label>
+                <input matInput placeholder="Enter your First-Name" formControlName="lastName" type="text">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-hint *ngIf="signUpForm.controls['lastName'].dirty&& signUpForm.hasError('required','lastName')" class="text-danger">*Last-Name must be required</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="Enter phone" formControlName="phone"  required>
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-hint *ngIf="signUpForm.controls['phone'].dirty&&signUpForm.hasError('required','phone')" class="text-danger">*Phone-Number must be required</mat-hint>
+              </mat-form-field>
+
+<!--              **88888888888888888888888888888888888888888888888888888888888888-->
+
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>city</mat-label>
+                <input matInput placeholder="Enter city" formControlName="city"  required>
+                <mat-icon matSuffix>location_city</mat-icon>
+                <mat-hint *ngIf="signUpForm.controls['city'].dirty&&signUpForm.hasError('required','city')" class="text-danger">*Phone-Number must be required</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>Role</mat-label>
+                <mat-select name="role" formControlName="role" >
+                  <mat-option *ngFor="let role of roles" [value]="role.value">
+                    {{ role.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+<!--              **88888888888888888888888888888888888888888888888888888888888888888-->
+
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="name@example.com" formControlName="email"  required>
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-hint *ngIf="signUpForm.controls['email'].dirty&&signUpForm.hasError('required', 'email')" class="text-danger"> * Email must required</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="width: 530px;">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint *ngIf="signUpForm.controls['password'].dirty&&signUpForm.hasError('required','password')" class="text-danger"> *Password must be required</mat-hint>
+              </mat-form-field>
+
+
+              <button mat-raised-button color="warn" type="submit" (click)="onSingup()" style="width: 530px; font-size: 14px;"> Sign Up</button>
+              <hr>
+              <div class="text-center pt-4 text-muted" style="font-size: 14px" >Already have account?<a id="signup" [routerLink]="['/','newlogin']" class="text-decoration-none" > Login</a></div>
+            </form>
+<!--            <div class="mt-3 my-2 py-2 border-top bordert">-->
+            <div class="text-center py-3 otherOptions">
+              <a href="https://www.facebook.com/" target="_blank" class="px-2"><img src="/assets/icons8-facebook-48.png" alt="Facebook" style="max-height: 40px"></a>
+              <a href="https://www.google.com/" target="_blank" class="px-2"><img src="/assets/icons8-google-94.png" alt="Google" style="max-height: 40px"></a>
+              <a href="https://github.com/" target="_blank" class="px-2"><img src="/assets/icons8-github-50.png" alt="GitHub" style="max-height: 40px"></a>
+<!--            </div>-->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+

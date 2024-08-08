@@ -2,9 +2,9 @@ import {AfterViewInit, Component, ElementRef, OnInit, Renderer2} from '@angular/
 import {NgToastService} from "ng-angular-popup";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {UserModel} from "../../models/user.model";
-import {AuthenticationService} from "../../services/authentication.service";
-import {DataService} from "../../services/data.service";
+import {UserModel} from "../../../models/user.model";
+import {AuthenticationService} from "../../../services/authentication.service";
+import {DataService} from "../../../services/data.service";
 import {NgxSpinner, NgxSpinnerService} from "ngx-spinner";
 import {user} from "@angular/fire/auth";
 
@@ -19,11 +19,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   oldUserData: any;
 
   UserDetails: UserModel ={
-    isEdit: true,
-    id: '',
-    username:'',
     firstname: '',
     lastname: '',
+    city:'',
+    phone:'',
     email: '',
     role: '',
   }
@@ -102,16 +101,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   onEdit(userObj: UserModel) {
     this.oldUserData = JSON.stringify(userObj);
     this.UserDetails = {
-      isEdit: true,
-      id: userObj.id,
-      username: userObj.username,
       firstname: userObj.firstname,
       lastname: userObj.lastname,
+      phone: userObj.phone,
+      city: userObj.city,
       email: userObj.email,
       role: userObj.role,
     };
-    this.users.forEach((e: UserModel) => (e.isEdit = false));
-    userObj.isEdit = true;
   }
 
 
